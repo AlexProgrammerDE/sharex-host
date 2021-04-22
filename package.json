@@ -1,0 +1,27 @@
+{
+  "name": "sharex",
+  "version": "1.0.0",
+  "description": "moo's sharex host",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moom0o/sharex.git"
+  },
+  "author": "AlexProgrammerDE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moom0o/sharex/issues"
+  },
+  "homepage": "https://github.com/moom0o/sharex#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "mime-types": "^2.1.30",
+    "onecolor": "^3.1.0",
+    "random-id": "^1.0.4",
+    "standard": "^16.0.3"
+  }
+}
