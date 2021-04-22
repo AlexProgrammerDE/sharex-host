@@ -6,13 +6,13 @@ const upload = require('express-fileupload')
 const rand = require('random-id')
 const cooldown = new Set()
 
+const url = 'https://images.pistonmaster.net'
 const owner_contact = 'Pistonmaster#0001'
 
 app.use(upload({preserveExtension: true, safeFileNames: true, limits: {fileSize: 100 * 1024 * 1024}}))
 app.use(express.json())
 
 app.get('/', async (req, res) => {
-    console.log("a")
     res.sendFile(__dirname + '/images/index.html')
 })
 
@@ -35,7 +35,6 @@ app.get('/i/:image', async (req, res) => {
 
 app.post('/upload', async (req, res) => {
     const fs = require('fs')
-    // if (!req.headers.authorization || req.headers.authorization !== auth) return res.sendStatus(401);
     const keys = JSON.parse(fs.readFileSync(__dirname + '/data/keys.json', 'utf-8'))
     if (keys.includes(req.headers.authorization)) {
         if (cooldown.has(req.headers.authorization)) {
@@ -53,7 +52,7 @@ app.post('/upload', async (req, res) => {
         const fileName = id + '.' + ext
         await file.mv(__dirname + '/images/' + fileName)
 
-        res.send(`${req.query.url}/${fileName}`)
+        res.send(`${url}/${fileName}`)
 
         cooldown.add(req.headers.authorization)
         setTimeout(() => {
@@ -68,4 +67,4 @@ app.post('/upload', async (req, res) => {
 })
 
 // listen for requests :)
-app.listen(80)
+app.listen(3000)
