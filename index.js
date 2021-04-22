@@ -18,19 +18,16 @@ app.get('/', async (req, res) => {
 
 app.get('/:image', async (req, res) => {
     if (!require('fs').existsSync(__dirname + '/images/' + req.params.image)) return res.status(404).send('Image not found.')
-    const myRegexp = /^([^ ]*)\.([^ ]*)$/g
-    if (!myRegexp.exec(req.params.image)) {
+    const myString = req.params.image;
+    const myRegexp = /^([^ ]*)\.([^ ]*)$/g;
+    const match = myRegexp.exec(myString);
+    if (!match) {
         return res.status(500).send('no extension')
     }
 
     if (match[2] !== 'png' || !req.params.image.startsWith('!')) {
         res.sendFile(__dirname + '/images/' + req.params.image)
     }
-})
-
-app.get('/i/:image', async (req, res) => {
-    if (!require('fs').existsSync(__dirname + '/images/' + req.params.image)) return res.status(404).send('Image not found.')
-    res.sendFile(__dirname + '/images/' + req.params.image)
 })
 
 app.post('/upload', async (req, res) => {
